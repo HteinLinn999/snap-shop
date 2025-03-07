@@ -1,3 +1,3 @@
-import { handlers} from "@/server/auth" // Referring to the auth.ts we just created
-export  const { GET, POST } = handlers
-//git testing 
+import { authOptions } from "@/server/auth";
+
+export {authOptions as GET ,authOptions as POST}
