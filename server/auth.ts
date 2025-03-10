@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+/* import NextAuth from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 
 import { db } from "@/server";
@@ -18,21 +18,18 @@ export const authOptions = NextAuth({
     }),
   ],
 });
-
-
-// server/auth.ts
-/* import { SessionStrategy } from "next-auth";
-import NextAuth from "next-auth";
+ */
+import NextAuth, { SessionStrategy } from "next-auth";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/server";
 import Google from "next-auth/providers/google";
 import Github from "next-auth/providers/github";
 
-// Create the NextAuth configuration
-const authOptions = {
+export const authOptions = {
   adapter: DrizzleAdapter(db),
-  secret: process.env.AUTH_SECRET!,
   session: { strategy: "jwt" as SessionStrategy },
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: true, // Enable debugging for NextAuth.js
   providers: [
     Google({
       clientId: process.env.GOOGLE_ID!,
@@ -45,11 +42,4 @@ const authOptions = {
   ],
 };
 
-// Initialize NextAuth and export handlers
-export const handlers = NextAuth(authOptions);
-
-// Export the handlers for use in the route.ts file
-export const { GET, POST } = handlers;
-
-// Export auth, signIn, and signOut for use elsewhere
-export const { auth, signIn, signOut } = handlers; */
+export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);
