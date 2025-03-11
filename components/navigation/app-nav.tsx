@@ -8,12 +8,11 @@ export default async function AppNav() {
     user: { name: string; email: string };
   };
  const {user} = session;
- console.log("user:",user);
+ 
   return (
-    <div>
-      {/* Pass the session as a prop to NavLogo */}
+    <div className="flex items-center justify-between">
       <NavLogo />
-      <UserButton />
+      <UserButton user={user} />
     </div>
   );
 }
