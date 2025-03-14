@@ -7,12 +7,12 @@ export default async function AppNav() {
   const session = (await getServerSession(authOptions)) as {
     user: { name: string; email: string };
   };
- const {user} = session;
- 
+ //const {user} = session;
+
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between py-4">
       <NavLogo />
-      <UserButton user={user} />
+      <UserButton user={session?.user || null } />
     </div>
   );
 }
