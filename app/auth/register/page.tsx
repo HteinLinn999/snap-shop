@@ -32,8 +32,15 @@ const Register = () => {
 
   const { status, result, execute } = useAction(register, {
     onSuccess({ data }) {
-      // console.log("data :", data);
-      toast(data?.success);
+      form.reset();
+      toast.success(data?.success, {
+        action: {
+          label: "Open Gmail",
+          onClick: () => {
+            window.open("https://mail.google.com", "_blank");
+          },
+        },
+      });
     },
   });
 

@@ -33,7 +33,7 @@ export default function RootLayout({
         <AppNav />
 
         <section>
-          {children} <Toaster />
+          {children} <Toaster position="top-center" richColors  closeButton/>
         </section>
       </body>
     </html>
