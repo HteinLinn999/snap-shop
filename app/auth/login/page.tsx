@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { login } from "@/server/actions/login-action";
 
 const Login = () => {
   const form = useForm({
