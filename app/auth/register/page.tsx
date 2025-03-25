@@ -32,15 +32,21 @@ const Register = () => {
 
   const { status, result, execute } = useAction(register, {
     onSuccess({ data }) {
+      console.log("data :", data);
       form.reset();
-      toast.success(data?.success, {
-        action: {
-          label: "Open Gmail",
-          onClick: () => {
-            window.open("https://mail.google.com", "_blank");
+      if(data?.error){
+        toast.error(data?.error);
+      }
+      if (data?.success) {
+        toast.success(data?.success, {
+          action: {
+            label: "Open Gmail",
+            onClick: () => {
+              window.open("https://mail.google.com", "_blank");
+            },
           },
-        },
-      });
+        });
+      }
     },
   });
 
@@ -112,6 +118,7 @@ const Register = () => {
               "w-full my-4 bg-primary",
               status === "executing" && "animate-pulse"
             )}
+            disabled={status === "executing"}
           >
             Register
           </Button>
