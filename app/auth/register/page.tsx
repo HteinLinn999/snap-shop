@@ -32,9 +32,9 @@ const Register = () => {
 
   const { status, result, execute } = useAction(register, {
     onSuccess({ data }) {
-      console.log("data :", data);
+      //console.log("data :", data);
       form.reset();
-      if(data?.error){
+      if (data?.error) {
         toast.error(data?.error);
       }
       if (data?.success) {
@@ -123,6 +123,7 @@ const Register = () => {
             Register
           </Button>
         </form>
+        x
       </Form>
     </AuthForm>
   );
