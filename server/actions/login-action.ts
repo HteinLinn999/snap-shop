@@ -9,11 +9,13 @@ import { generateEmailVerificationToken } from "./tokens";
 import { sendEmail } from "./emails";
 
 import {authOptions} from '../auth';
+
 export const login = actionClient
   .schema(loginSchema)
   .action(async ({ parsedInput: { email, password } }) => {
 
     const { signIn } = authOptions;
+    
     try {
       //check email exists or not in the database
       const existingUser = await db.query.users.findFirst({

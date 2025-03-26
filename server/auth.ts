@@ -45,7 +45,7 @@ export const authOptions = NextAuth({
           return isMatch ? user : null;
         } catch (error) {
           console.error("Authorization error:", error);
-          //if (error instanceof ZodError) 
+          
           return null;
         }
       },
@@ -54,3 +54,4 @@ export const authOptions = NextAuth({
   secret: process.env.AUTH_SECRET,
 });
 //export default NextAuth(authOptions);
+

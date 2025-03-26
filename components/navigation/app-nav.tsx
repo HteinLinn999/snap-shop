@@ -1,5 +1,6 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/server/auth";
+//import {auth} from "@/server/auth";
 import NavLogo from "./nav-logo";
 import UserButton from "./user-button";
 
@@ -9,6 +10,7 @@ export default async function AppNav() {
   };
  //const {user} = session;
 
+//const session = await auth();
   return (
     <div className="flex items-center justify-between py-4">
       <NavLogo />
