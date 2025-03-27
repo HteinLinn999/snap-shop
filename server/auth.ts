@@ -25,33 +25,37 @@ export const authOptions = NextAuth({
       clientSecret: process.env.GITHUB_SECRET!,
     }),
     Credentials({
-      credentials: {
+      /* credentials: {
         email: { label: "Email", type: "text", placeholder: "example@example.com" },
         password: { label: "*********", type: "password" },
+      } */
+      credentials: {
+        email: {},
+        password: {},
       },
       authorize: async (credentials) => {
         try {
           const validatedData = loginSchema.safeParse(credentials);
           if (!validatedData.success) return null;
-    
+
           const { email, password } = validatedData.data;
+
           const user = await db.query.users.findFirst({
             where: eq(users.email, email),
           });
-    
+
           if (!user || !user.password) return null;
-    
+
           const isMatch = await bcrypt.compare(password, user.password);
           return isMatch ? user : null;
         } catch (error) {
           console.error("Authorization error:", error);
-          
+
           return null;
         }
       },
-    })
+    }),
   ],
   secret: process.env.AUTH_SECRET,
 });
-//export default NextAuth(authOptions);
-
+//export const { handlers, signIn, signOut, auth } = NextAuth(authOptions);

@@ -9,12 +9,16 @@ import { generateEmailVerificationToken } from "./tokens";
 import { sendEmail } from "./emails";
 
 import {authOptions} from '../auth';
+import { AuthError } from "next-auth";
+import { signIn } from 'next-auth/server';
 
 export const login = actionClient
   .schema(loginSchema)
   .action(async ({ parsedInput: { email, password } }) => {
 
     const { signIn } = authOptions;
+    console.log("authOptions.signOut :", authOptions.signOut);
+    console.log("signIn :", signIn);
     
     try {
       //check email exists or not in the database
@@ -41,7 +45,17 @@ export const login = actionClient
 
       await signIn("credentials", { email, password, redirrectTo: "/" });
       return { success: "Logged in successfully" };
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      /* if (error instanceof AuthError) {
+        const authError = error as AuthError; // Explicitly assert the type
+        switch (authError.type) {
+          case "CredentialsSignin":
+            return {error: "please provide valid credentials"};
+          case "OAuthSigninError":
+            return {error: (error as AuthError).message};
+        }
+      } */
+     console.log("error :", error);
+      throw { error : error.message };
     }
   });
